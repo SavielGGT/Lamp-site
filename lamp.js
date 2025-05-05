@@ -61,7 +61,7 @@ function signup() {
   firebase.auth().createUserWithEmailAndPassword(email, password)
     
     .catch(error => {
-      alert("Цей логін вже використовується! " );
+      showModal("Цей логін вже використовується! " );
     });
 }
 
@@ -73,7 +73,7 @@ function signin() {
   firebase.auth().signInWithEmailAndPassword(email, password)
     
     .catch(error => {
-      alert("Змініть логін або пароль! ");
+      showModal("Змініть логін або пароль! ");
     });
 }
 
