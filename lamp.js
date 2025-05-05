@@ -1,4 +1,10 @@
 document.addEventListener("DOMContentLoaded", () => {
+
+window.signup = signup;
+window.signin = signin;
+window.toggleLamp = toggleLamp;
+window.logout = logout;
+
   
 const firebaseConfig = {
   apiKey: "AIzaSyBmWJow_9tpnOid4mPhiZBcIfNTdrpvuyA",
