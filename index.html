@@ -14,21 +14,25 @@
    <script src="lamp.js"></script>
   <h1>Керування лампочкою</h1>
 
-  <div id="auth">
-    <input type="email" id="email" placeholder="Email">
-    <input type="password" id="password" placeholder="Пароль">
-    <br>
-    <button onclick="signup()">Sign Up</button>
-<button onclick="signin()">Sign In</button>
-  </div>
+<div id="auth">
+  <input type="email" id="email" placeholder="Email">
+  <input type="password" id="password" placeholder="Пароль">
+  <br>
+  <button onclick="signup()">Sign Up</button>
+  <button onclick="signin()">Sign In</button>
+</div>
 
-  <div id="control">
-    <img id="lampImage" src = "https://raw.githubusercontent.com/SavielGGT/Lump-status/main/OFF.png" alt="Лампочка">
-    <br>
+<div id="control" style="display: none;">
+  <h1>Керування лампочкою</h1>
+
+  <img id="lampImage" src="https://raw.githubusercontent.com/SavielGGT/Lump-status/main/OFF.png" alt="Лампочка">
+
+  <div class="button-row">
     <button onclick="toggleLamp()">Перемкнути лампочку</button>
-    <br>
     <button onclick="logout()">Вийти</button>
   </div>
+</div>
+
 
  
 </body>
