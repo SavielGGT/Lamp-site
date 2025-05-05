@@ -38,10 +38,7 @@ function signup() {
   const password = document.getElementById("password").value;
 
   firebase.auth().createUserWithEmailAndPassword(email, password)
-    .then(userCredential => {
-      alert("Реєстрація успішна");
-      showLampControl();
-    })
+    
     .catch(error => {
       alert("Помилка реєстрації " );
     });
@@ -53,10 +50,7 @@ function signin() {
   const password = document.getElementById("password").value;
 
   firebase.auth().signInWithEmailAndPassword(email, password)
-    .then(userCredential => {
-      alert("Вхід успішний");
-      showLampControl();
-    })
+    
     .catch(error => {
       alert("Помилка входу ");
     });
