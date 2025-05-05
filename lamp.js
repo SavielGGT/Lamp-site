@@ -17,7 +17,7 @@ const db = firebase.database();
 
 const authDiv = document.getElementById("auth");
 const controlDiv = document.getElementById("control");
-const lampImg = document.getElementById("lamp");
+const lampImg = document.getElementById("lampImage");
 
 const lampOnURL = "https://raw.githubusercontent.com/SavielGGT/Lump-status/main/ON.png";
 const lampOffURL = "https://raw.githubusercontent.com/SavielGGT/Lump-status/main/OFF.png";
