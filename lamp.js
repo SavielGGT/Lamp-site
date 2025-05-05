@@ -1,3 +1,5 @@
+document.addEventListener("DOMContentLoaded", () => {
+  
 const firebaseConfig = {
   apiKey: "ТУТ_ТВОЄ",
   authDomain: "ТУТ_ТВОЄ",
@@ -60,4 +62,6 @@ auth.onAuthStateChanged(user => {
     controlDiv.style.display = "none";
     authDiv.style.display = "block";
   }
+});
+
 });
