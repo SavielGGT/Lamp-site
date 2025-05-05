@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
 const firebaseConfig = {
   apiKey: "AIzaSyBmWJow_9tpnOid4mPhiZBcIfNTdrpvuyA",
   authDomain: "lamp-control-fc1db.firebaseapp.com",
-  databaseURL: "https://lamp-control-fc1db-default-rtdb.europe-west1.firebasedatabase.app",
+  databaseURL: "https://lamp-control-fdb-default-rtdb.europe-west1.firebasedatabase.app",
   projectId: "lamp-control-fc1db",
   storageBucket: "lamp-control-fc1db.firebasestorage.app",
   messagingSenderId: "281052206161",
