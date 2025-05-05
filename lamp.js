@@ -1,14 +1,15 @@
 document.addEventListener("DOMContentLoaded", () => {
   
 const firebaseConfig = {
-  apiKey: "ТУТ_ТВОЄ",
-  authDomain: "ТУТ_ТВОЄ",
+  apiKey: "AIzaSyBmWJow_9tpnOid4mPhiZBcIfNTdrpvuyA",
+  authDomain: "lamp-control-fc1db.firebaseapp.com",
   databaseURL: "https://lamp-control-fc1db-default-rtdb.europe-west1.firebasedatabase.app",
-  projectId: "ТУТ_ТВОЄ",
-  storageBucket: "ТУТ_ТВОЄ",
-  messagingSenderId: "ТУТ_ТВОЄ",
-  appId: "ТУТ_ТВОЄ"
+  projectId: "lamp-control-fc1db",
+  storageBucket: "lamp-control-fc1db.firebasestorage.app",
+  messagingSenderId: "281052206161",
+  appId: "1:281052206161:web:c3209e52f10e8ea3351470"
 };
+
 
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
