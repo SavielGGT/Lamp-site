@@ -61,7 +61,7 @@ function signup() {
   firebase.auth().createUserWithEmailAndPassword(email, password)
     
     .catch(error => {
-      showModal("Неправельний логін вже використовується! " );
+      showModal("Неправельний логін або він вже використовується, пароль має бути більше 5 символів! " );
     });
 }
 
