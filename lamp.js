@@ -43,7 +43,7 @@ function signup() {
       showLampControl();
     })
     .catch(error => {
-      alert("Помилка реєстрації: " + error.message);
+      console.error("Помилка реєстрації: " + error.message);
     });
 }
 
@@ -58,7 +58,7 @@ function signin() {
       showLampControl();
     })
     .catch(error => {
-      alert("Помилка входу: " + error.message);
+      console.error("Помилка входу: " + error.message);
     });
 }
 
