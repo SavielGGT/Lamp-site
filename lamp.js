@@ -34,7 +34,7 @@ function toggleLamp() {
   });
 }
 
-function signUp() {
+function signup() {
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
 
@@ -49,7 +49,7 @@ function signUp() {
 }
 
 // Вхід
-function signIn() {
+function signin() {
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
 
