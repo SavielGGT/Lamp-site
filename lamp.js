@@ -37,15 +37,30 @@ function toggleLamp() {
 function signUp() {
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
-  auth.createUserWithEmailAndPassword(email, password)
-    .catch(error => alert(error.message));
+
+  firebase.auth().createUserWithEmailAndPassword(email, password)
+    .then(userCredential => {
+      alert("Реєстрація успішна");
+      showLampControl();
+    })
+    .catch(error => {
+      alert("Помилка реєстрації: " + error.message);
+    });
 }
 
+// Вхід
 function signIn() {
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
-  auth.signInWithEmailAndPassword(email, password)
-    .catch(error => alert(error.message));
+
+  firebase.auth().signInWithEmailAndPassword(email, password)
+    .then(userCredential => {
+      alert("Вхід успішний");
+      showLampControl();
+    })
+    .catch(error => {
+      alert("Помилка входу: " + error.message);
+    });
 }
 
 function logout() {
