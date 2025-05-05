@@ -40,28 +40,32 @@ function signup() {
 
   firebase.auth().createUserWithEmailAndPassword(email, password)
     .then(userCredential => {
-      alert("Реєстрація успішна");
+      // Замість alert — напишемо повідомлення на екран
+      document.getElementById("auth").innerHTML += "<p>Реєстрація успішна!</p>";
       showLampControl();
     })
     .catch(error => {
-      alert("Помилка реєстрації: " + error.message);
+      // Виведемо помилку в консоль замість alert
+      console.error("Помилка реєстрації: " + error.message);
     });
 }
 
-// Вхід
 function signin() {
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
 
   firebase.auth().signInWithEmailAndPassword(email, password)
     .then(userCredential => {
-      alert("Вхід успішний");
+      // Замість alert — напишемо повідомлення на екран
+      document.getElementById("auth").innerHTML += "<p>Вхід успішний!</p>";
       showLampControl();
     })
     .catch(error => {
-      alert("Помилка входу: " + error.message);
+      // Виведемо помилку в консоль замість alert
+      console.error("Помилка входу: " + error.message);
     });
 }
+
 
 function logout() {
   auth.signOut();
