@@ -38,32 +38,30 @@ function signup() {
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
 
- firebase.auth().createUserWithEmailAndPassword(email, password)
+  firebase.auth().createUserWithEmailAndPassword(email, password)
     .then(userCredential => {
       alert("Реєстрація успішна");
       showLampControl();
     })
     .catch(error => {
-      // Виведемо помилку в консоль замість alert
-      console.error("Помилка реєстрації: " + error.message);
+      alert("Помилка реєстрації: " + error.message);
     });
 }
 
+// Вхід
 function signin() {
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
 
- irebase.auth().signInWithEmailAndPassword(email, password)
+  firebase.auth().signInWithEmailAndPassword(email, password)
     .then(userCredential => {
       alert("Вхід успішний");
       showLampControl();
     })
     .catch(error => {
-      // Виведемо помилку в консоль замість alert
-      console.error("Помилка входу: " + error.message);
+      alert("Помилка входу: " + error.message);
     });
 }
-
 
 function logout() {
   auth.signOut();
