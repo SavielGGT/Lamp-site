@@ -38,10 +38,9 @@ function signup() {
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
 
-  firebase.auth().createUserWithEmailAndPassword(email, password)
+ firebase.auth().createUserWithEmailAndPassword(email, password)
     .then(userCredential => {
-      // Замість alert — напишемо повідомлення на екран
-      document.getElementById("auth").innerHTML += "<p>Реєстрація успішна!</p>";
+      alert("Реєстрація успішна");
       showLampControl();
     })
     .catch(error => {
@@ -54,10 +53,9 @@ function signin() {
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
 
-  firebase.auth().signInWithEmailAndPassword(email, password)
+ irebase.auth().signInWithEmailAndPassword(email, password)
     .then(userCredential => {
-      // Замість alert — напишемо повідомлення на екран
-      document.getElementById("auth").innerHTML += "<p>Вхід успішний!</p>";
+      alert("Вхід успішний");
       showLampControl();
     })
     .catch(error => {
