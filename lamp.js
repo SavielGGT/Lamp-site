@@ -21,6 +21,27 @@ const lampImg = document.getElementById("lampImage");
 const lampOnURL = "https://raw.githubusercontent.com/SavielGGT/Lump-status/main/ON.png";
 const lampOffURL = "https://raw.githubusercontent.com/SavielGGT/Lump-status/main/OFF.png";
 
+
+function showModal(message) {
+  const modal = document.getElementById("modal");
+  const modalMessage = document.getElementById("modalMessage");
+  const modalClose = document.getElementById("modalClose");
+
+  modalMessage.textContent = message;
+  modal.classList.remove("hidden");
+
+  modalClose.onclick = () => {
+    modal.classList.add("hidden");
+  };
+
+  window.onclick = (event) => {
+    if (event.target === modal) {
+      modal.classList.add("hidden");
+    }
+  };
+}
+
+  
 function updateLamp(state) {
   lampImg.src = (state === "on") ? lampOnURL : lampOffURL;
 }
