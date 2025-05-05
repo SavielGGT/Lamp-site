@@ -19,9 +19,9 @@ button{
     padding: 8px 16px;
     margin: 5px;
     cursor: pointer;
-    background-color #7C6363;
-    color: white
-    border-radius: 25px
+    background-color: #7C6363;
+    color: white;
+    border-radius: 25px;
 }
 img {
   width: 200px;
