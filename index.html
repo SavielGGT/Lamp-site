@@ -1,37 +1,34 @@
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Лампочка</title>
-  <link rel="stylesheet" href="vizual.css">
-  <!-- Firebase App (потрібно завжди) -->
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
-
-<!-- Firebase Realtime Database -->
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
-  
+  <title>Лампочка з авторизацією</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 </head>
 <body>
-  <div class="container">
-    <h1>Керування лампочкою</h1>
-    <img id="lampImage" src = "https://raw.githubusercontent.com/SavielGGT/Lump-status/main/OFF.png" alt="Лампочка">
-    <button id="toggleButton">Увімкнути</button>
+  <h1>Керування лампочкою</h1>
+
+  <div id="auth">
+    <input type="email" id="email" placeholder="Email">
+    <input type="password" id="password" placeholder="Пароль">
+    <br>
+    <button onclick="signUp()">Реєстрація</button>
+    <button onclick="signIn()">Вхід</button>
   </div>
 
-<!-- signup.html -->
-<h2>Реєстрація</h2>
-<input type="email" id="signupEmail" placeholder="Email">
-<input type="password" id="signupPassword" placeholder="Пароль">
-<button onclick="signUp()">Зареєструватися</button>
+  <div id="control">
+    <img id="lamp" src="" alt="Стан лампочки">
+    <br>
+    <button onclick="toggleLamp()">Перемкнути лампочку</button>
+    <br>
+    <button onclick="logout()">Вийти</button>
+  </div>
 
-<!-- signin.html -->
-<h2>Вхід</h2>
-<input type="email" id="signinEmail" placeholder="Email">
-<input type="password" id="signinPassword" placeholder="Пароль">
-<button onclick="signIn()">Увійти</button>
-
-  
-  <script src="lamp.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
