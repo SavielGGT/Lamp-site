@@ -1,0 +1,45 @@
+#include <ESP8266WiFi.h>
+#include <FirebaseESP8266.h>
+
+// Firebase
+#define FIREBASE_HOST "lamp-control-fc1db-default-rtdb.europe-west1.firebasedatabase.app"
+#define FIREBASE_AUTH "AIzaSyBmWJow_9tpnOid4mPhiZBcIfNTdrpvuyA"
+
+// Wi-Fi
+#define WIFI_SSID "ТВОЯ_WiFi_МЕРЕЖА"
+#define WIFI_PASSWORD "ТВІЙ_ПАРОЛЬ"
+
+// Лампочка
+#define RELAY_PIN D5
+String userId = "USER_ID"; // <- замінити на справжній UID користувача
+String lampPath = "/users/" + userId + "/lampState";
+
+FirebaseData firebaseData;
+
+void setup() {
+  Serial.begin(115200);
+  pinMode(RELAY_PIN, OUTPUT);
+  digitalWrite(RELAY_PIN, LOW); // Початково вимкнено
+
+  WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
+  Serial.print("Підключення до Wi-Fi");
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+  }
+  Serial.println("OK");
+
+  Firebase.begin(FIREBASE_HOST, FIREBASE_AUTH);
+  Firebase.reconnectWiFi(true);
+}
+
+void loop() {
+  if (Firebase.getString(firebaseData, lampPath)) {
+    String state = firebaseData.stringData();
+    digitalWrite(RELAY_PIN, (state == "on") ? HIGH : LOW);
+    Serial.println("Стан лампочки: " + state);
+  } else {
+    Serial.println("Помилка отримання: " + firebaseData.errorReason());
+  }
+  delay(1000); // Перевірка кожну секунду
+}
