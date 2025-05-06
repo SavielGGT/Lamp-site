@@ -104,5 +104,5 @@ document.addEventListener("DOMContentLoaded", () => {
   window.signin = signin;
   window.toggleLamp = toggleLamp;
   window.logout = logout;
-  window.connectToLamp = connectToLamp;
+  window.setLampId = setLampId;
 });
