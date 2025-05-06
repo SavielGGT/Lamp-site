@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+
   const firebaseConfig = {
     apiKey: "AIzaSyBmWJow_9tpnOid4mPhiZBcIfNTdrpvuyA",
     authDomain: "lamp-control-fc1db.firebaseapp.com",
@@ -16,12 +17,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const authDiv = document.getElementById("auth");
   const controlDiv = document.getElementById("control");
   const lampImg = document.getElementById("lampImage");
-  const lampIdInput = document.getElementById("lampIdInput");
 
   const lampOnURL = "https://raw.githubusercontent.com/SavielGGT/Lump-status/main/ON.png";
   const lampOffURL = "https://raw.githubusercontent.com/SavielGGT/Lump-status/main/OFF.png";
 
-  let lampRef = null;
+  let currentUserId = null;
+  let lampRef = null; // окреме посилання на вузол користувача
 
   function showModal(message) {
     const modal = document.getElementById("modal");
@@ -31,8 +32,15 @@ document.addEventListener("DOMContentLoaded", () => {
     modalMessage.textContent = message;
     modal.classList.remove("hidden");
 
-    modalClose.onclick = () => modal.classList.add("hidden");
-    window.onclick = (e) => { if (e.target === modal) modal.classList.add("hidden"); };
+    modalClose.onclick = () => {
+      modal.classList.add("hidden");
+    };
+
+    window.onclick = (event) => {
+      if (event.target === modal) {
+        modal.classList.add("hidden");
+      }
+    };
   }
 
   function updateLamp(state) {
@@ -48,29 +56,13 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  function connectToLamp() {
-    const lampId = lampIdInput.value.trim();
-    if (!lampId) {
-      showModal("Введіть ID лампочки.");
-      return;
-    }
-
-    if (lampRef) lampRef.off();
-    lampRef = db.ref("lamps/" + lampId);
-
-    lampRef.on("value", snapshot => {
-      const state = snapshot.val() || "off";
-      updateLamp(state);
-    });
-  }
-
   function signup() {
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
 
-    auth.createUserWithEmailAndPassword(email, password)
+    firebase.auth().createUserWithEmailAndPassword(email, password)
       .catch(error => {
-        showModal("Помилка реєстрації: перевірте email або пароль (не менше 6 символів).");
+        showModal("Неправельний логін або він вже використовується, пароль має бути більше 5 символів!");
       });
   }
 
@@ -78,9 +70,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
 
-    auth.signInWithEmailAndPassword(email, password)
+    firebase.auth().signInWithEmailAndPassword(email, password)
       .catch(error => {
-        showModal("Помилка входу: перевірте email або пароль.");
+        showModal("Змініть логін або пароль!");
       });
   }
 
@@ -90,11 +82,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
   auth.onAuthStateChanged(user => {
     if (user) {
+      currentUserId = user.uid;
       authDiv.style.display = "none";
       controlDiv.style.display = "block";
+
+      lampRef = db.ref("users/" + currentUserId + "/lampState");
+
+      lampRef.on("value", snapshot => {
+        const state = snapshot.val() || "off";
+        updateLamp(state);
+      });
+
     } else {
       controlDiv.style.display = "none";
       authDiv.style.display = "block";
+      currentUserId = null;
       if (lampRef) lampRef.off();
       lampRef = null;
     }
@@ -104,5 +106,6 @@ document.addEventListener("DOMContentLoaded", () => {
   window.signin = signin;
   window.toggleLamp = toggleLamp;
   window.logout = logout;
-  window.connectToLamp = connectToLamp;
+
 });
+
