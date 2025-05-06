@@ -85,8 +85,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     lampRef = db.ref("lamps/" + lampId);
-    controlDiv.classList.remove("hidden");
     lampIdInputDiv.classList.add("hidden");
+    controlDiv.classList.remove("hidden");
 
     lampRef.on("value", (snapshot) => {
       const state = snapshot.val() || "off";
@@ -94,11 +94,15 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   };
 
+  // Слухаємо зміну авторизації
   auth.onAuthStateChanged(user => {
     if (user) {
+      // Після входу показуємо поле для вводу ID лампочки
       authDiv.classList.add("hidden");
       lampIdInputDiv.classList.remove("hidden");
+      controlDiv.classList.add("hidden");
     } else {
+      // Показуємо тільки авторизацію
       authDiv.classList.remove("hidden");
       lampIdInputDiv.classList.add("hidden");
       controlDiv.classList.add("hidden");
