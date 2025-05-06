@@ -48,21 +48,20 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  function connectToLamp() {
-    const lampId = lampIdInput.value.trim();
-    if (!lampId) {
-      showModal("Введіть ID лампочки.");
-      return;
-    }
-
-    if (lampRef) lampRef.off();
-    lampRef = db.ref("lamps/" + lampId);
-
-    lampRef.on("value", snapshot => {
-      const state = snapshot.val() || "off";
-      updateLamp(state);
-    });
+  function setLampId() {
+  const lampId = document.getElementById("lampId").value.trim();
+  if (!lampId) {
+    showModal("Введіть ID лампочки");
+    return;
   }
+
+  lampRef = db.ref("lamps/" + lampId + "/state");
+
+  lampRef.on("value", (snapshot) => {
+    const state = snapshot.val() || "off";
+    updateLamp(state);
+  });
+}
 
   function signup() {
     const email = document.getElementById("email").value;
