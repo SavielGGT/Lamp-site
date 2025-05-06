@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Керування лампочкою</title>
+  <title>Лампочка</title>
   <link rel="stylesheet" href="vizual.css">
   <!-- Firebase -->
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
@@ -19,28 +19,28 @@
   </div>
 </div>
 
-<h1>Керування лампочкою</h1>
+  
+   <script src="lamp.js"></script>
+  <h1>Керування лампочкою</h1>
 
-<div id="auth">
-  <input type="email" id="email" placeholder="Email">
-  <input type="password" id="password" placeholder="Пароль">
-  <br>
-  <button onclick="signup()">Реєстрація</button>
-  <button onclick="signin()">Увійти</button>
-</div>
+  <div id="auth">
+    <input type="email" id="email" placeholder="Email">
+    <input type="password" id="password" placeholder="Пароль">
+    <br>
+    <button onclick="signup()">Реєстрація</button>
+<button onclick="signin()">Увійти</button>
+  </div>
 
-<div id="control">
-  <img id="lampImage" src="https://raw.githubusercontent.com/SavielGGT/Lump-status/main/OFF.png" alt="Лампочка">
-  <br>
-  <button onclick="toggleLamp()">Перемкнути лампочку</button>
-  <br>
-  <input type="text" id="lampIdInput" placeholder="Введіть ID лампочки">
-  <br>
-  <button onclick="connectToLamp()">Підключити</button>
-  <br>
-  <button onclick="logout()">Вийти</button>
-</div>
+  <div id="control">
+    <img id="lampImage" src = "https://raw.githubusercontent.com/SavielGGT/Lump-status/main/OFF.png" alt="Лампочка">
+    <br>
+    <button onclick="toggleLamp()">Перемкнути лампочку</button>
+    <br>
+    <button onclick="logout()">Вийти</button>
+  </div>
 
-<script src="lamp.js"></script>
+ 
 </body>
 </html>
+
+
