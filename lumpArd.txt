@@ -1,45 +1,57 @@
-#include <ESP8266WiFi.h>
-#include <FirebaseESP8266.h>
+#include <ESP8266WiFi.h>        // Include the Wi-Fi library
+#include "FirebaseESP8266.h"
 
-// Firebase
-#define FIREBASE_HOST "lamp-control-fc1db-default-rtdb.europe-west1.firebasedatabase.app"
-#define FIREBASE_AUTH "AIzaSyBmWJow_9tpnOid4mPhiZBcIfNTdrpvuyA"
+const int ledPin = 2;
+char FIREBASE_AUTH [] = "AIzaSyBmWJow_9tpnOid4mPhiZBcIfNTdrpvuyA"; // Your Firebase Web API Key
+char FIREBASE_HOST [] = "https://lamp-control-fc1db-default-rtdb.europe-west1.firebasedatabase.app/"; // Your Firebase Host URL
+const char* ssid     = "light_alex";         // The SSID (name) of the Wi-Fi network you want to connect to
+const char* password = "19216811";     // The password of the Wi-Fi network
 
-// Wi-Fi
-#define WIFI_SSID "ТВОЯ_WiFi_МЕРЕЖА"
-#define WIFI_PASSWORD "ТВІЙ_ПАРОЛЬ"
+String userId = "4BoAFuCa8qhj7D09x3uoCRZ6FFm2"; 
+String lampPath = "/users/" + userId + "/lampState:";
 
-// Лампочка
-#define RELAY_PIN D5
-String userId = "USER_ID"; // <- замінити на справжній UID користувача
-String lampPath = "/users/" + userId + "/lampState";
-
-FirebaseData firebaseData;
+FirebaseData fbdo;
 
 void setup() {
-  Serial.begin(115200);
-  pinMode(RELAY_PIN, OUTPUT);
-  digitalWrite(RELAY_PIN, LOW); // Початково вимкнено
+  Serial.begin(115200);         // Start the Serial communication to send messages to the computer
+  delay(10);
+  Serial.println('\n');
+  
+  WiFi.begin(ssid, password);             // Connect to the network
+  Serial.print("Connecting to ");
+  Serial.print(ssid); Serial.println(" ...");
 
-  WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
-  Serial.print("Підключення до Wi-Fi");
-  while (WiFi.status() != WL_CONNECTED) {
-    delay(500);
-    Serial.print(".");
+  int i = 0;
+  while (WiFi.status() != WL_CONNECTED) { // Wait for the Wi-Fi to connect
+    delay(1000);
+    Serial.print(++i); Serial.print(' ');
   }
-  Serial.println("OK");
 
-  Firebase.begin(FIREBASE_HOST, FIREBASE_AUTH);
-  Firebase.reconnectWiFi(true);
+  Serial.println('\n');
+  Serial.println("Connection established!");  
+  Serial.print("IP address:\t");
+  Serial.println(WiFi.localIP());         // Send the IP address of the ESP8266 to the computer
+
+ pinMode(ledPin,OUTPUT);
+ Firebase.begin(FIREBASE_HOST, FIREBASE_AUTH);  
 }
 
-void loop() {
-  if (Firebase.getString(firebaseData, lampPath)) {
-    String state = firebaseData.stringData();
-    digitalWrite(RELAY_PIN, (state == "on") ? HIGH : LOW);
-    Serial.println("Стан лампочки: " + state);
+void loop() 
+{
+  // Перевірка стану лампочки кожні 1 секунду
+  if (Firebase.getString(fbdo, "/users/4BoAFuCa8qhj7D09x3uoCRZ6FFm2/lampState")) {
+    String lampState = fbdo.stringData();
+    Serial.println("Стан лампочки: " + lampState);
+
+    if (lampState == "on") {
+      digitalWrite(ledPin, LOW);
+    } else if (lampState == "off") {
+      digitalWrite(ledPin, HIGH);
+    }
   } else {
-    Serial.println("Помилка отримання: " + firebaseData.errorReason());
+    Serial.print("Помилка читання: ");
+    Serial.println(fbdo.errorReason());
   }
-  delay(1000); // Перевірка кожну секунду
+
+  delay(1000); // Затримка між перевірками
 }
