@@ -38,7 +38,7 @@ void setup() {
 
 void loop() 
 {
-  // Перевірка стану лампочки кожні 1 секунду
+  // 1sec
   if (Firebase.getString(fbdo, "/users/4BoAFuCa8qhj7D09x3uoCRZ6FFm2/lampState")) {
     String lampState = fbdo.stringData();
     Serial.println("Стан лампочки: " + lampState);
